@@ -27,7 +27,7 @@ app.use('/test', test);
 
 
 var personagem = new Personagem('jsilva');
-var tamanho = 30;
+var tamanho = 16;
 var mapa = new Mapa(tamanho);
 mapa.fornecerCelula(0, 0).fixarPersonagem(personagem);
 
@@ -42,7 +42,7 @@ app.io.route('mapa', function(req){
   req.io.emit('dimensoes', {linhas: tamanho, colunas: tamanho});
 });
 app.io.route('andar', function(req){
-  console.log("Andou!!");
+  console.log("Andou para " + req.data.direcao);
   personagem.andar(req.data.direcao);
   req.io.emit('andou', {
     linha: personagem.celula.linha,

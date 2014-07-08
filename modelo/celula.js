@@ -1,8 +1,14 @@
+// Uma célula quadrada, com vizinhos em 4 direções (CIMA, BAIXO, ESQUERDA e DIREITA).
+
+
 var Personagem = require('./personagem');
-var Direcao = require('./direcao');
 var Celula = function(linha, coluna)
 {
-  this.vizinhos = [null, null, null, null, null];
+  this.vizinhos = [];
+  this.vizinhos['CIMA'] = null;
+  this.vizinhos['BAIXO'] = null;
+  this.vizinhos['ESQUERDA'] = null;
+  this.vizinhos['DIREITA'] = null;
   this.linha = linha;
   this.coluna = coluna;
   this.personagem = null;
@@ -12,13 +18,14 @@ Celula.prototype.moverPersonagem = function(personagem, direcao)
 {
   if(direcao == 'NENHUMA')
     return this;
-  var vizinho = Direcao[direcao].valor;
-  if(this.vizinhos[vizinho] != null)
+  console.log("vizinho de/da " + direcao);
+  console.log(this.vizinhos[direcao]);
+  if(this.vizinhos[direcao] != null)
   {
-    if(this.vizinhos[vizinho].fixarPersonagem(Personagem))
+    if(this.vizinhos[direcao].fixarPersonagem(personagem))
     {
       this.personagem = null;
-      return this.vizinhos[vizinho];
+      return this.vizinhos[direcao];
     }
   }
   return this;
