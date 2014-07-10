@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var test = require('./routes/test');
-var Personagem = require('./modelo/personagem');
-var Mapa = require('./modelo/mapa');
+var Jogo = require('./modelo/jogo');
+var Rede = require('./modelo/rede/rede');
 
 var app = express().http().io();
 
@@ -26,29 +26,11 @@ app.use('/', routes);
 app.use('/test', test);
 
 
-var personagem = new Personagem('jsilva');
-var tamanho = 16;
-var mapa = new Mapa(tamanho);
-mapa.fornecerCelula(0, 0).fixarPersonagem(personagem);
+var rede = new Rede(app.io);
+var jogo = new Jogo(rede);
+rede.init(jogo);
 
 console.log("Iniciou o servidor, aguardando conexões...");
-
-// NON-HTTP IO
-app.io.route('connect', function(req){
-  console.log("Conectou!!");
-});
-app.io.route('mapa', function(req){
-  console.log("Usuário pediu as dimensões do mapa");
-  req.io.emit('dimensoes', {linhas: tamanho, colunas: tamanho});
-});
-app.io.route('andar', function(req){
-  console.log("Andou para " + req.data.direcao);
-  personagem.andar(req.data.direcao);
-  req.io.emit('andou', {
-    linha: personagem.celula.linha,
-    coluna: personagem.celula.coluna
-  });
-});
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

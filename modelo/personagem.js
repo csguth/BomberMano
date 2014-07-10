@@ -7,6 +7,7 @@ var Personagem = function(nome)
 
 Personagem.prototype.andar = function(direcao){
   this.celula = this.celula.moverPersonagem(this, direcao);
+  return {linha: this.celula.linha, coluna: this.celula.coluna};
 }
 
 module.exports = Personagem;

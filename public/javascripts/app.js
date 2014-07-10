@@ -1,27 +1,28 @@
 var App;
 var canvas;
 var controle;
+var credenciais = {personagem: 'jsilva'};
 var loop = function()
 {
   if(controle.cima)
   {
     console.log('Andando para cima...');
-    App.socket.emit('andar', {direcao: 'CIMA'});
+    App.socket.emit('andar', {'credenciais': credenciais, direcao: 'CIMA'});
   }
   if(controle.baixo)
   {
     console.log('Andando para baixo...'); 
-    App.socket.emit('andar', {direcao: 'BAIXO'});
+    App.socket.emit('andar', {'credenciais': credenciais, direcao: 'BAIXO'});
   }
   if(controle.esquerda)
   {
     console.log('Andando para esquerda...');
-    App.socket.emit('andar', {direcao: 'ESQUERDA'});
+    App.socket.emit('andar', {'credenciais': credenciais, direcao: 'ESQUERDA'});
   }
   if(controle.direita)
   {
     console.log('Andando para direita...');
-    App.socket.emit('andar', {direcao: 'DIREITA'});
+    App.socket.emit('andar', {'credenciais': credenciais, direcao: 'DIREITA'});
   }
 }
 
@@ -31,8 +32,9 @@ $(function(){
   App = {};
   App.socket = io.connect();
   App.socket.on('connect', function(){
-    App.socket.emit('mapa');
-    App.socket.emit('andar', {direcao: 'NENHUMA'});
+    App.socket.emit('mapa', {'credenciais': credenciais});
+    App.socket.emit('entrarNoJogo', {'credenciais': credenciais});
+    App.socket.emit('andar', {'credenciais': credenciais, 'direcao': 'NENHUMA'});
   });
   var linhas = 4; // APENAS UM VALOR DEFAULT
   var colunas = 4; // APENAS UM VALOR DEFAULT

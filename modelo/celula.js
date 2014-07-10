@@ -18,8 +18,6 @@ Celula.prototype.moverPersonagem = function(personagem, direcao)
 {
   if(direcao == 'NENHUMA')
     return this;
-  console.log("vizinho de/da " + direcao);
-  console.log(this.vizinhos[direcao]);
   if(this.vizinhos[direcao] != null)
   {
     if(this.vizinhos[direcao].fixarPersonagem(personagem))
