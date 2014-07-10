@@ -1,6 +1,5 @@
 // Uma célula quadrada, com vizinhos em 4 direções (CIMA, BAIXO, ESQUERDA e DIREITA).
 
-
 var Personagem = require('./personagem');
 var Celula = function(linha, coluna)
 {
@@ -11,7 +10,7 @@ var Celula = function(linha, coluna)
   this.vizinhos['DIREITA'] = null;
   this.linha = linha;
   this.coluna = coluna;
-  this.personagem = null;
+  this.personagens = {};
 }
 
 Celula.prototype.moverPersonagem = function(personagem, direcao)
@@ -22,7 +21,7 @@ Celula.prototype.moverPersonagem = function(personagem, direcao)
   {
     if(this.vizinhos[direcao].fixarPersonagem(personagem))
     {
-      this.personagem = null;
+      delete this.personagens[personagem.nome];
       return this.vizinhos[direcao];
     }
   }
@@ -31,7 +30,7 @@ Celula.prototype.moverPersonagem = function(personagem, direcao)
 
 Celula.prototype.fixarPersonagem = function(personagem)
 {
-  this.personagem = personagem;
+  this.personagens[personagem.nome] = personagem;
   personagem.celula = this;
   return true;
 }

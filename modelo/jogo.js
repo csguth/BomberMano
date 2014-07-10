@@ -21,4 +21,13 @@ Jogo.prototype.andar = function(personagem, direcao)
   return this._personagens[personagem].andar(direcao);
 }
 
+Jogo.prototype.posicoes = function() {
+	var posicoes = [];
+	for(personagem in this._personagens)
+	{
+		posicoes[this._personagens.nome] = {linha: this._personagem.celula.linha, coluna: this._personagem.celula.coluna};
+	}
+	return posicoes;
+};
+
 module.exports = Jogo;

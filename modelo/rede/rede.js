@@ -1,6 +1,6 @@
-var Rede = function(socket)
+var Rede = function(app)
 {
-  this._socket = socket;
+  this.app = app;
   this._jogo = null;
 }
 
@@ -8,18 +8,34 @@ Rede.prototype.init = function(jogo)
 {
   this._jogo = jogo;
   var escopo = this;
+  
   // NON-HTTP IO
-  this._socket.route('connect', function(req){
+  this.app.io.route('connect', function(req){
     console.log("Um jogador conectou!!");
   });
-  this._socket.route('entrarNoJogo', function(req){
+
+  this.app.io.route('entrarNoJogo', function(req){
     escopo._jogo.cadastrarPersonagem(req.data.credenciais.personagem);
   });
-  this._socket.route('mapa', function(req){
-    req.io.emit('dimensoes', escopo._jogo._mapa._dimensoes);
+
+  this.app.io.route('mapa', function(req){
+    console.log("recebeu 'mapa'");
+    console.log(req.data);
+    req.io.emit('dimensoes', {
+      dimensoes: escopo._jogo._mapa._dimensoes,
+      credenciais: req.data.credenciais
+    });
+    // BUSCAR AS POSICOES DE TODO MUNDO
   });
-  this._socket.route('andar', function(req){
-    req.io.emit('andou', escopo._jogo.andar(req.data.credenciais.personagem, req.data.direcao));
+
+  this.app.io.route('andar', function(req){
+    console.log("recebeu 'andar'");
+    var resposta = {
+      personagem: req.data.credenciais.personagem,
+      posicao: escopo._jogo.andar(req.data.credenciais.personagem, req.data.direcao)
+    };
+    console.log(resposta);
+    escopo.app.io.broadcast('posicao', resposta);
   });
 }
 

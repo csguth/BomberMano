@@ -26,7 +26,7 @@ app.use('/', routes);
 app.use('/test', test);
 
 
-var rede = new Rede(app.io);
+var rede = new Rede(app);
 var jogo = new Jogo(rede);
 rede.init(jogo);
 

@@ -5,13 +5,9 @@ block content
       h1 BomberMano
         sup
           small beta
-      canvas(width='1080', height='400')
-      h2 Controles
-      ul
-        li
-          span.label.label-info Setas
-          |  Movimento
-        li
-          span.label.label-success Espaço
-          |  Bomba 
-          span.label.label-danger nao implementado
+      form.form-inline
+        .input-group
+          input.form-control#entrada-personagem(type='text', value='csguth', placeholder='personagem')
+        .input-group
+          button.btn.btn-info#entrada-conectar
+      canvas(width='400', height='400')
