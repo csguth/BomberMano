@@ -10,29 +10,18 @@ var Celula = function(linha, coluna)
   this.vizinhos['DIREITA'] = null;
   this.linha = linha;
   this.coluna = coluna;
-  this.personagens = {};
+  this.entidades = [];
 }
 
-Celula.prototype.moverPersonagem = function(personagem, direcao)
-{
-  if(direcao == 'NENHUMA')
-    return this;
-  if(this.vizinhos[direcao] != null)
-  {
-    if(this.vizinhos[direcao].fixarPersonagem(personagem))
-    {
-      delete this.personagens[personagem.nome];
-      return this.vizinhos[direcao];
-    }
+Celula.prototype = {
+  adicionarEntidade: function(entidade) {
+    this.entidades.push(entidade);
+  },
+  removerEntidade: function(entidade) {
+  var indice = this.entidades.indexOf(entidade);
+  if(indice > -1)
+    this.entidades.splice(indice, 1);
   }
-  return this;
-}
-
-Celula.prototype.fixarPersonagem = function(personagem)
-{
-  this.personagens[personagem.nome] = personagem;
-  personagem.celula = this;
-  return true;
 }
 
 module.exports = Celula;

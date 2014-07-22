@@ -9,6 +9,8 @@ var routes = require('./routes/index');
 var test = require('./routes/test');
 var Jogo = require('./modelo/jogo');
 var Rede = require('./modelo/rede/rede');
+var CaixaDeAreia = require('./modelo/caixa-de-areia');
+var Tempo = require('./modelo/tempo')
 
 var app = express().http().io();
 
@@ -26,11 +28,17 @@ app.use('/', routes);
 app.use('/test', test);
 
 
-var rede = new Rede(app);
-var jogo = new Jogo(rede);
-rede.init(jogo);
+// var rede = new Rede(app);
+// var jogo = new Jogo(rede);
+// rede.init(jogo);
 
-console.log("Iniciou o servidor, aguardando conexões...");
+var caixaDeAreia = new CaixaDeAreia();
+caixaDeAreia.inicializar();
+setInterval(function(){
+    caixaDeAreia.atualizar();
+}, Tempo.periodoDeAtualizacao);
+
+// console.log("Iniciou o servidor, aguardando conexões...");
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

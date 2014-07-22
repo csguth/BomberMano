@@ -8,6 +8,12 @@ Rede.prototype.init = function(jogo)
 {
   this._jogo = jogo;
   var escopo = this;
+
+  this.app.io.route('controle', function(req){
+    var personagem = req.data.credenciais.personagem;
+    var comando = req.data.comando;
+    escopo._jogo.tratarEntrada(personagem, comando);
+  });
   
   // NON-HTTP IO
   this.app.io.route('connect', function(req){
@@ -15,6 +21,7 @@ Rede.prototype.init = function(jogo)
   });
 
   this.app.io.route('entrarNoJogo', function(req){
+    console.log("Cadastrnado o personagem: " + req.data.credenciais.personagem);
     escopo._jogo.cadastrarPersonagem(req.data.credenciais.personagem);
   });
 

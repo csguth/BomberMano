@@ -28,6 +28,11 @@ Jogo.prototype.posicoes = function() {
 		posicoes[this._personagens.nome] = {linha: this._personagem.celula.linha, coluna: this._personagem.celula.coluna};
 	}
 	return posicoes;
-};
+}
+
+Jogo.prototype.tratarEntrada = function(personagem, comando)
+{
+  this._personagens[personagem].tratarEntrada(comando);
+}
 
 module.exports = Jogo;
