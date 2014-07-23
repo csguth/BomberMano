@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="17" height="17" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="grass-tiles-2-small" tilewidth="32" tileheight="32">
+  <image source="grass-tiles-2-small.png" width="384" height="192"/>
+ </tileset>
+ <tileset firstgid="73" name="littleshrooms_0" tilewidth="32" tileheight="32">
+  <image source="littleshrooms_0.png" width="32" height="40"/>
+ </tileset>
+ <layer name="chao" width="17" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUj+IBwgCTZgEi
+  </data>
+ </layer>
+ <layer name="parede" width="17" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzjYmBg4KICpgQgm0EJPeqOUXeMuoP+7qAUAwAFQgRr
+  </data>
+ </layer>
+ <layer name="blocos quebraveis" width="17" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAu8MRDI2NizEAXQzcTl15yMSl+wUdTyx3k2o/uF3SzSQ0LXHxK3EGsGygJD2zup0e8EFKH7hZ0d2FTgy/fkBoeuMzAFu6E7KYGAAAXqSdb
+  </data>
+ </layer>
+</map>

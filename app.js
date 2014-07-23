@@ -28,15 +28,18 @@ app.use('/', routes);
 app.use('/test', test);
 
 
-// var rede = new Rede(app);
-// var jogo = new Jogo(rede);
-// rede.init(jogo);
-
-var caixaDeAreia = new CaixaDeAreia();
-caixaDeAreia.inicializar();
+var rede = new Rede(app);
+var jogo = new Jogo(rede);
+rede.init(jogo);
 setInterval(function(){
-    caixaDeAreia.atualizar();
+    jogo.atualizar();
 }, Tempo.periodoDeAtualizacao);
+
+// var caixaDeAreia = new CaixaDeAreia();
+// caixaDeAreia.inicializar();
+// setInterval(function(){
+//     caixaDeAreia.atualizar();
+// }, Tempo.periodoDeAtualizacao);
 
 // console.log("Iniciou o servidor, aguardando conexões...");
 
